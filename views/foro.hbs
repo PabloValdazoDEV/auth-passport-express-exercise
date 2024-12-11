@@ -1,0 +1,13 @@
+{{#each posts}}
+<div style="margin-bottom:100px">
+    <h3>{{this.title}}</h3>
+    <p>{{this.content}}</p>
+    <p>Author: {{this.User.username}}</p>
+    <p>Date post: {{this.createdAt}}</p>
+    {{#if isOwner}}
+    <form action="/post/delete/{{this.id}}?_method=DELETE" method="post">
+    <button type="submit">Delete</button>
+    </form>
+     {{/if}}
+</div >
+{{/each}}
