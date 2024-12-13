@@ -12,6 +12,7 @@ const hbs = create({
   partialsDir: 'views/partials',
   helpers: require('./utils/helpers'),
 });
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

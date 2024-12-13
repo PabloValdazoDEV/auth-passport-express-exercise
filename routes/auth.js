@@ -3,18 +3,22 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const passport = require('passport');
 const prisma = require('../prisma/prisma.js')
+const {redirectLogin} = require("../middleware/isAuthenticated");
 
 // Ruta de registro
 router.post('/register', async (req, res) => {
   try {
+    if(!req.body.password && !req.body.username){
+      res.status(500)
+    }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     await prisma.user.create({
       data: {
         username: req.body.username,
-        password: hashedPassword
+        password: hashedPassword,
       }
     });
-    res.redirect('/auth/post');
+    res.redirect('/post/foro');
   } catch (error) {
     console.log(error)
     res.redirect('/auth/register');
@@ -28,13 +32,22 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: true,
 }));
 
-router.get('/login', (req, res) => {
+router.get('/login',redirectLogin,  (req, res) => {
   res.render('login');
 });
 
-router.get('/register', (req, res) => {
+router.get('/register',redirectLogin,  (req, res) => {
   res.render('register');
 });
+
+router.get('/github',redirectLogin,  passport.authenticate('github', { scope: ['user:email'] }));
+
+router.get('/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/post/foro');
+  }
+);
 
 
 module.exports = router;
