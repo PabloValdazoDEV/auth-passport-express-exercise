@@ -41,6 +41,7 @@ router.get("/foro", isAuthenticated, async(req,res)=>{
         })
     } catch (error) {
         console.error(error)
+        res.status(500).send("Error al cargar el foro.");
     }
     
 })
@@ -59,8 +60,8 @@ router.post("/create", isAuthenticated, async (req,res)=>{
         })
         res.redirect("/post/foro")
     } catch (error) {
-        res.render("/auth/login")
         console.error(error)
+        res.status(500).send("Error al crear el post.");
     }
 })
 router.get("/create", isAuthenticated, (req,res)=>{
@@ -69,16 +70,16 @@ router.get("/create", isAuthenticated, (req,res)=>{
 
 router.delete("/delete/:id", isAuthenticated, async (req, res)=>{
     const { id } = req.params
-
     try {
         await prisma.post.delete({
             where:{
                 id
             }
         })
-        res.redirect("/post/foro")
+        return res.redirect("/post/foro")
     } catch (error) {
-        
+        console.error(error)
+        return res.status(500).send("Error al eliminar el post");
     }
 })
 

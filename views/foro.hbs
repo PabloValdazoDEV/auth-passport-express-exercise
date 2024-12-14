@@ -1,9 +1,11 @@
+<div class="container-foro">
 {{#each posts}}
-<div style="margin-bottom:100px">
-    <h3>{{this.title}}</h3>
-    <p>{{this.content}}</p>
-    <p>Author: {{this.User.username}}</p>
-    <p>Date post: {{this.createdAt}}</p>
+    
+<div class="conatiner-post">
+    <h3><b>Titulo del Post: </b>{{this.title}}</h3>
+    <p><b>Contenido del Post: </b>{{this.content}}</p>
+    <p><b>Author:</b> {{this.User.username}}</p>
+    <p>Fecha del post: {{ formatDate this.createdAt "DD/MM/YYYY"}}</p>
     {{#if isOwner}}
     <form action="/post/delete/{{this.id}}?_method=DELETE" method="post">
     <button type="submit">Delete</button>
@@ -11,3 +13,4 @@
      {{/if}}
 </div >
 {{/each}}
+</div>

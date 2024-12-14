@@ -1,11 +1,14 @@
+<div class="container-newComment">
+
 <form action="/post/create" method="post">
-<div>
+<div style="width: 50%;display:grid; gap:20px">
     <label for="title">Title of comment</label>
     <input type="text" name="title" id="title" required>
 </div>
-<div>
+<div style="width: 50%;display:grid; gap:20px  ">
     <label for="content">Content of comment</label>
-    <input type="text" name="content" id="content">
+    <textarea type="text"  name="content" id="content"></textarea>
 </div>
 <button type="submit">Published</button>
 </form>
+</div>

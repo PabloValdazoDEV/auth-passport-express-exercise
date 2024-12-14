@@ -3,10 +3,10 @@ const router = express.Router();
 
 const postRoutes = require("./post")
 const authRoutes = require("./auth");
-const { prueba } = require('../middleware/funcionMiddelware');
+const { proteccionRuta } = require('../middleware/funcionMiddelware');
 router.use('/auth', authRoutes)
 
-router.use(prueba)
+router.use(proteccionRuta)
 
 router.use('/post', postRoutes)
 
