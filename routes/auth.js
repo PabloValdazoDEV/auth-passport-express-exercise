@@ -5,7 +5,6 @@ const passport = require('passport');
 const prisma = require('../prisma/prisma.js')
 const {redirectLogin} = require("../middleware/isAuthenticated");
 
-// Ruta de registro
 router.post('/register', async (req, res) => {
   try {
     if(!req.body.password && !req.body.username){
@@ -25,7 +24,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Ruta de inicio de sesión
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/post/foro',
   failureRedirect: '/auth/login',
