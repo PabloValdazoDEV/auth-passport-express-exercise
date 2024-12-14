@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const passport = require('passport');
 const prisma = require('../prisma/prisma.js')
-const {redirectLogin} = require("../middleware/isAuthenticated");
+const {redirectLogin} = require("../middleware/funcionMiddelware.js");
 
 router.post('/register', async (req, res) => {
   try {
@@ -47,5 +47,11 @@ router.get('/github/callback',
   }
 );
 
+router.get('/logout', function(req, res, next){
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/auth/login');
+  });
+});
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const express = require("express");
-const {isAuthenticated} = require("../middleware/isAuthenticated");
+const {isAuthenticated} = require("../middleware/funcionMiddelware.js");
 const router = express.Router()
 const prisma = require('../prisma/prisma.js')
 

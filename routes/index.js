@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const postRoutes = require("./post")
-const authRoutes = require("./auth")
+const authRoutes = require("./auth");
+const { prueba } = require('../middleware/funcionMiddelware');
+router.use('/auth', authRoutes)
+
+router.use(prueba)
 
 router.use('/post', postRoutes)
-router.use('/auth', authRoutes)
 
 
 module.exports = router;
