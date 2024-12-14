@@ -15,7 +15,8 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Usuario no encontrado' });
       }
-      if (!bcrypt.compare(password, user.password)) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
         return done(null, false, { message: 'Contraseña incorrecta' });
       }
       return done(null, user);
